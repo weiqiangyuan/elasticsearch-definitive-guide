@@ -1,14 +1,9 @@
 [[has-parent]]
-=== Finding Children by Their Parents
+=== 根据父文档查询子文档
 
-While a `nested` query can always ((("parent-child relationship", "finding children by their parents")))return only the root document as a result,
-parent and child documents are independent and each can be queried
-independently.  The `has_child` query allows us to return parents based on
-data in their children, and the `has_parent` query returns children based on
-data in their parents.((("has_parent query and filter", "query")))
+`nested` query 只能返回最顶层的文档 ((("parent-child relationship", "finding children by their parents")))，而在父-子文档中，父文档和子文档都是独立的，并且可以被单独地查询出来。`has_child` 实现了根据子文档的数据内容来查询父文档，类似我们也有 `has_parent` ，实现了根据父文档的数据内容来查询子文档((("has_parent query and filter", "query")))。
 
-It looks very similar to the `has_child` query.  This example returns
-employees who work in the UK:
+`has_parent` 和 `has_child` 非常相似，下面的查询将会返回所有在 UK 工作的雇员：
 
 [source,json]
 -------------------------
@@ -26,19 +21,13 @@ GET /company/employee/_search
   }
 }
 -------------------------
-<1> Returns children who have parents of type `branch`
+<1> 指定子文档对应的父文档 type 是 `branch`
 
-The `has_parent` query also supports the `score_mode`,((("score_mode parameter"))) but it accepts only two
-settings: `none` (the default) and `score`.  Each child can have only one
-parent, so there is no need to reduce multiple scores into a single score for
-the child.  The choice is simply between using the score (`score`) or not
-(`none`).
+`has_parent` query 也支持 `score_mode` 这个参数，((("score_mode parameter")))但是该参数只支持两种值： `none` （默认）和 `score` 。因为每一个子文档都只有一个父文档，对子文档而言并不需要在多个评分中进行筛选，因此 `score_mode` 就很简单，取值仅为 `score` 和 `none` 。
 
-.Non-scoring has_parent Query
+.不带评分的 has_parent 查询
 **************************
 
-When used in non-scoring mode (e.g. inside a `filter` clause), the `has_parent`
-query no longer supports the `score_mode` parameter.  Because it is merely
-including/excluding documents and not scoring, the `score_mode` parameter
-no longer applies.
+当不需要评分时（例如：在一个 `filter` 查询语句中），`has_parent` 不支持 `source_mode` 参数。因为 filter 查询的结果仅是存在或者不存在并且不需要评分，因此 `source_mode` 这个参数也就不需要了。
+
 **************************
