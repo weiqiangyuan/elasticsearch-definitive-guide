@@ -21,6 +21,7 @@ Elasticsearch 维护了一个父文档和子文档的映射关系，得益于这
 建立父-子文档映射关系时只需要指定某一个文档 type 是另一个文档 type 的父亲。 ((("mapping (types)", "parent-child"))) ((("parent-child relationship", "parent-child mapping"))) 该关系可以在如下两个时间点设置：1）创建索引时；2）在子文档 type 创建之前更新父文档的 mapping。
 
 举例说明，有一个公司在多个城市有分公司，并且每一个分公司下面都有很多员工。有这样的需求：按照分公司、员工的维度去搜索，并且把员工和他们工作的分公司联系起来。针对该需求，用嵌套模型是无法实现的。当然，如果使用 <<application-joins,application-side-joins>> 或者 <<denormalization,data denormalization>> 也是可以实现的，但是为了演示的目的，在这里我们使用父-子文档。
+
 我们需要告诉Elasticsearch，在创建员工 `employee` 文档 type 时，指定分公司 `branch` 的文档 type 为其父亲。
 
 [source,json]
