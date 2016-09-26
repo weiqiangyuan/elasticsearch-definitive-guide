@@ -3,7 +3,7 @@
 
 父-子关系文档 ((("relationships", "parent-child"))) ((("parent-child relationship"))) 在实质上类似于 <<nested-objects,nested model>> ：允许将一个对象实体和另外一个对象实体关联起来。((("nested objects", "parent-child relationships versus")))而这两种类型的主要区别是：在 <<nested-objects,`nested` objects>> 文档中，所有对象都是在同一个文档中，而在父-子关系文档中，父对象和子对象都是完全独立的文档。
 
-父-子关系的主要作用是允许把一个 type 的文档和另外一个 type 的文档关联起来，构成1对多的关系：一个父文档可以对应多个子文档 ((("one-to-many relationships"))) 。与 <<nested-objects,`nested` objects>> 相比，父-子关系的主要优势有：
+父-子关系的主要作用是允许把一个 type 的文档和另外一个 type 的文档关联起来，构成一对多的关系：一个父文档可以对应多个子文档 ((("one-to-many relationships"))) 。与 <<nested-objects,`nested` objects>> 相比，父-子关系的主要优势有：
 
 * 更新父文档时，不会重新索引子文档。
 * 创建，修改或删除子文档时，不会影响父文档或其他子文档。这一点在这种场景下尤其有用：子文档数量较多，并且子文档创建和修改的频率高时。
