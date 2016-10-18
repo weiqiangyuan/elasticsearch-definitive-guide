@@ -1,7 +1,7 @@
 [[has-parent]]
 === 根据父文档查询子文档
 
-`nested` query 只能返回最顶层的文档 ((("parent-child relationship", "finding children by their parents")))，而在父-子文档中，父文档和子文档都是独立的，并且可以被单独地查询出来。`has_child` 实现了根据子文档的数据内容来查询父文档，类似我们也有 `has_parent` ，实现了根据父文档的数据内容来查询子文档((("has_parent query and filter", "query")))。
+虽然 `nested` 查询只能返回最顶层的文档 ((("parent-child relationship", "finding children by their parents")))，但是父文档和子文档本身是彼此独立并且可被单独查询的。我们使用 `has_child` 语句可以基于子文档来查询父文档，使用 `has_parent` 语句可以基于子文档来查询父文档。。
 
 `has_parent` 和 `has_child` 非常相似，下面的查询将会返回所有在 UK 工作的雇员：
 
@@ -21,13 +21,13 @@ GET /company/employee/_search
   }
 }
 -------------------------
-<1> 指定子文档对应的父文档 type 是 `branch`
+<1> 返回父文档 `type` 是 `branch` 的所有子文档
 
-`has_parent` query 也支持 `score_mode` 这个参数，((("score_mode parameter")))但是该参数只支持两种值： `none` （默认）和 `score` 。因为每一个子文档都只有一个父文档，对子文档而言并不需要在多个评分中进行筛选，因此 `score_mode` 就很简单，取值仅为 `score` 和 `none` 。
+`has_parent` 查询也支持 `score_mode` 这个参数，((("score_mode parameter")))但是该参数只支持两种值： `none` （默认）和 `score` 。每个子文档都只有一个父文档，因此这里不存在将多个评分规约为一个的情况， `score_mode` 的取值仅为 `score` 和 `none` 。
 
 .不带评分的 has_parent 查询
 **************************
 
-当不需要评分时（例如：在一个 `filter` 查询语句中），`has_parent` 不支持 `source_mode` 参数。因为 filter 查询的结果仅是存在或者不存在并且不需要评分，因此 `source_mode` 这个参数也就不需要了。
+当 `has_parent` 查询用于非评分模式（比如 filter 查询语句）时， `score_mode` 参数就不再起作用了。因为这种模式只是简单地包含或排除文档，没有评分，那么 `score_mode` 参数也就没有意义了。
 
 **************************
