@@ -1,5 +1,5 @@
 [[has-parent]]
-=== 根据父文档查询子文档
+=== 通过父文档查询子文档
 
 虽然 `nested` 查询只能返回最顶层的文档 ((("parent-child relationship", "finding children by their parents")))，但是父文档和子文档本身是彼此独立并且可被单独查询的。我们使用 `has_child` 语句可以基于子文档来查询父文档，使用 `has_parent` 语句可以基于子文档来查询父文档。。
 
