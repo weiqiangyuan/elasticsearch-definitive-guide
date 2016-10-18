@@ -1,5 +1,5 @@
 [[has-child]]
-=== 根据子文档查询父文档
+=== 通过子文档查询父文档
 
 `has_child` 的查询和过滤可以通过子文档的内容来查询父文档。((("has_child query and filter")))((("parent-child relationship", "finding parents by their children")))例如，我们根据如下查询，可查出所有80员工所在的分公司：
 [source,json]
